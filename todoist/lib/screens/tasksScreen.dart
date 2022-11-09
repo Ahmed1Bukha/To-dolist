@@ -14,10 +14,6 @@ class tasksScreen extends StatefulWidget {
 }
 
 class _tasksScreenState extends State<tasksScreen> {
-  List<Task> task = [
-    Task(name: "Take the trash out."),
-    Task(name: "Lmfao gg ff go next"),
-  ];
 
   Widget buildBottomThing(BuildContext build) =>
       AddTaskScreen((String newTaskTile) {
