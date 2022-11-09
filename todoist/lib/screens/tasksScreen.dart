@@ -3,12 +3,29 @@
 import 'package:flutter/material.dart';
 import 'package:todoist/widgets/list_view.dart';
 
+import '../modules/task.dart';
 import '../widgets/bottomSheet.dart';
 
-class tasksScreen extends StatelessWidget {
+class tasksScreen extends StatefulWidget {
   const tasksScreen({super.key});
 
-  Widget buildBottomThing(BuildContext build) => AddTaskScreen();
+  @override
+  State<tasksScreen> createState() => _tasksScreenState();
+}
+
+class _tasksScreenState extends State<tasksScreen> {
+  List<Task> task = [
+    Task(name: "Take the trash out."),
+    Task(name: "Lmfao gg ff go next"),
+  ];
+
+  Widget buildBottomThing(BuildContext build) =>
+      AddTaskScreen((String newTaskTile) {
+        print(task);
+        setState(() {
+          task.add(Task(name: newTaskTile));
+        });
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +69,7 @@ class tasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "12 task",
+                  "${task.length} task",
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ],
@@ -62,7 +79,7 @@ class tasksScreen extends StatelessWidget {
             child: Container(
               // ignore: sort_child_properties_last
               padding: EdgeInsets.symmetric(horizontal: 20),
-              child: viewLmfao(),
+              child: viewLmfao(task),
               height: 300,
               decoration: BoxDecoration(
                 color: Colors.white,

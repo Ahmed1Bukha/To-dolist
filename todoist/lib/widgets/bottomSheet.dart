@@ -1,13 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({super.key});
+  final Function addTaskCallBack;
+  const AddTaskScreen(this.addTaskCallBack);
 
   @override
   Widget build(BuildContext context) {
+    String newTaskTile = "";
+
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -31,9 +35,14 @@ class AddTaskScreen extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              onChanged: (value) {
+                newTaskTile = value;
+              },
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                addTaskCallBack(newTaskTile);
+              },
               child: Text("Add"),
               style: TextButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,
